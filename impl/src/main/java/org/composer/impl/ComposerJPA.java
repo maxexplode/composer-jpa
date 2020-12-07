@@ -1,10 +1,24 @@
-package org.composer;
+package org.composer.impl;
+
+import org.composer.api.introspect.IntrospectContext;
+import org.composer.common.ComposerRecord;
 
 import java.sql.*;
 
 import java.util.List;
+import java.util.ServiceLoader;
 
 public class ComposerJPA {
+
+    static {
+        init();
+    }
+
+    static void init() {
+        ServiceLoader loader = ServiceLoader.load(IntrospectContext.class);
+        System.out.println(loader);
+        //ServiceRegistry.registerService(ServiceRegistry.ServiceType.PHASER, );
+    }
 
     public static void main(String[] args) {
         try {
@@ -38,7 +52,7 @@ public class ComposerJPA {
                                 System.out.println("matched catalog : " + scheme.catalog());
                                 configuration.setCatalog(scheme.catalog());
                                 List<ComposerRecord.Table> tables = mapper.getTables(metaData, configuration);
-                                System.out.println(tables);
+                                introspectTables(tables);
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -48,6 +62,11 @@ public class ComposerJPA {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private static void introspectTables(List<ComposerRecord.Table> tables) {
+
+
     }
 
 }

@@ -1,4 +1,4 @@
-package org.composer.db;
+package org.composer.impl.db;
 
 import javax.sql.DataSource;
 import java.io.FileNotFoundException;

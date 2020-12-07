@@ -1,6 +1,6 @@
-package org.composer.db.impl;
+package org.composer.impl.db.impl;
 
-import org.composer.db.DataSourceProvider;
+import org.composer.impl.db.DataSourceProvider;
 
 import javax.sql.DataSource;
 import java.util.Properties;

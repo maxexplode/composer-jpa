@@ -1,4 +1,6 @@
-package org.composer;
+package org.composer.impl;
+
+import org.composer.common.ComposerRecord;
 
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
@@ -26,7 +28,7 @@ public class ResultSetMapper {
      * @throws SQLException
      */
     public List<String> getCatalogs(DatabaseMetaData metaData) throws SQLException {
-        List<String> catalogs = new ArrayList<>();
+        var catalogs = new ArrayList<String>();
         try (ResultSet rs = metaData.getCatalogs()) {
             while (rs.next()) {
                 String catalog = val("TABLE_CAT", rs, String.class);
@@ -44,7 +46,7 @@ public class ResultSetMapper {
      * @throws SQLException
      */
     public List<ComposerRecord.Scheme> getSchemes(DatabaseMetaData metaData) throws SQLException {
-        List<ComposerRecord.Scheme> catalogs = new ArrayList<>();
+        var catalogs = new ArrayList<ComposerRecord.Scheme>();
         try (ResultSet rs = metaData.getSchemas()) {
             while (rs.next()) {
 
@@ -119,7 +121,7 @@ public class ResultSetMapper {
     }
 
     public List<ComposerRecord.ImportedExportedKey> getImportedExportedKeys(boolean exported, DatabaseMetaData metaData, ComposerConfiguration configuration, String tableName) throws SQLException {
-        List<ComposerRecord.ImportedExportedKey> keys = new ArrayList<>();
+        var keys = new ArrayList<ComposerRecord.ImportedExportedKey>();
         if (exported) {
             try (ResultSet rs = metaData.getExportedKeys(configuration.getCatalog(), configuration.getSchemaPatterns(), tableName)) {
                 while (rs.next()) {
@@ -196,7 +198,7 @@ public class ResultSetMapper {
     }
 
     public List<ComposerRecord.PrimaryKey> getPrimaryKeys(DatabaseMetaData metaData, ComposerConfiguration configuration, String tableName) throws SQLException {
-        List<ComposerRecord.PrimaryKey> primaryKeys = new ArrayList<>();
+        var primaryKeys = new ArrayList<ComposerRecord.PrimaryKey>();
         try (ResultSet rs = metaData.getPrimaryKeys(configuration.getCatalog(), configuration.getSchemaPatterns(), tableName)) {
             while (rs.next()) {
                 ComposerRecord.PrimaryKey primaryKey = new ComposerRecord.PrimaryKey(
@@ -214,7 +216,7 @@ public class ResultSetMapper {
     }
 
     public List<ComposerRecord.Column> getColumns(DatabaseMetaData metaData, ComposerConfiguration configuration, String tableName) throws SQLException {
-        List<ComposerRecord.Column> columns = new ArrayList<>();
+        var columns = new ArrayList<ComposerRecord.Column>();
         try (ResultSet rs = metaData.getColumns(configuration.getCatalog(), configuration.getSchemaPatterns(), tableName, null)) {
             while (rs.next()) {
                 ComposerRecord.Column column = new ComposerRecord.Column(

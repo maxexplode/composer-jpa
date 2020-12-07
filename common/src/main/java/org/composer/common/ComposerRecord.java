@@ -1,10 +1,10 @@
-package org.composer;
+package org.composer.common;
 
 import java.util.List;
 
 public class ComposerRecord {
 
-    enum TableType {
+    public enum TableType {
         VIEW, SYSTEM_TABLE, GLOBAL_TEMPORARY, LOCAL_TEMPORARY, ALIAS, SYNONYM,
         /* POSTGRE SQL */
         SYSTEM_INDEX,
@@ -13,15 +13,15 @@ public class ComposerRecord {
         TABLE
     }
 
-    enum RefGeneration {SYSTEM, USER, DERIVED}
+    public enum RefGeneration {SYSTEM, USER, DERIVED}
 
-    enum ColumnNullable {NO_NULL, NULLABLE, UNKNOWN}
+    public enum ColumnNullable {NO_NULL, NULLABLE, UNKNOWN}
 
-    enum BooleanResponse {YES, NO, NA}
+    public enum BooleanResponse {YES, NO, NA}
 
-    enum UpdateDeleteRule {IMPORTED_NO_ACTION, IMPORTED_KEY_CASCADE, IMPORTED_KEY_SET_NULL, IMPORTED_KEY_SET_DEFAULT, IMPORTED_KEY_RESTRICT}
+    public enum UpdateDeleteRule {IMPORTED_NO_ACTION, IMPORTED_KEY_CASCADE, IMPORTED_KEY_SET_NULL, IMPORTED_KEY_SET_DEFAULT, IMPORTED_KEY_RESTRICT}
 
-    enum Deferrability {IMPORTED_KEY_INITIALLY_DEFERRED, IMPORTED_KEY_INITIALLY_IMMEDIATE, IMPORTED_KEY_NOT_DEFERRABLE}
+    public enum Deferrability {IMPORTED_KEY_INITIALLY_DEFERRED, IMPORTED_KEY_INITIALLY_IMMEDIATE, IMPORTED_KEY_NOT_DEFERRABLE}
 
     public static record Scheme(String scheme, String catalog) {
 

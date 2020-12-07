@@ -1,4 +1,4 @@
-package org.composer;
+package org.composer.impl;
 
 
 public class ComposerConfiguration {
