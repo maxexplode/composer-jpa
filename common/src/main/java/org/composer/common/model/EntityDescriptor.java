@@ -1,4 +1,4 @@
-package org.composer.impl.model;
+package org.composer.common.model;
 
 import java.util.Set;
 

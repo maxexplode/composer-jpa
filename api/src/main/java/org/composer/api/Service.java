@@ -1,4 +1,4 @@
-package org.composer.impl.service;
+package org.composer.api;
 
 public interface Service {
     ServiceRegistry.ServiceType getType();

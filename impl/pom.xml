@@ -26,12 +26,21 @@
             <artifactId>api</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.composer</groupId>
+            <artifactId>config</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-text</artifactId>
         </dependency>
         <dependency>
             <groupId>com.oracle.database.jdbc</groupId>
             <artifactId>ojdbc10</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity-engine-core</artifactId>
+            <version>2.2</version>
         </dependency>
     </dependencies>
 
