@@ -12,4 +12,9 @@ public class ConfigResolver implements Service {
     {
         return ServiceRegistry.ServiceType.CONFIG;
     }
+
+    void resolveConfiguration()
+    {
+
+    }
 }

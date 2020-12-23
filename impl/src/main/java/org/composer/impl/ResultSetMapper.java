@@ -264,6 +264,76 @@ public class ResultSetMapper {
         return columns;
     }
 
+    public List<ComposerRecord.SqlType> getSqlTypes(DatabaseMetaData metaData, ComposerConfiguration configuration) throws SQLException {
+        var sqlTypes = new ArrayList<ComposerRecord.SqlType>();
+        try (ResultSet rs = metaData.getTypeInfo()) {
+            while (rs.next()) {
+                ComposerRecord.SqlType sqlType = new ComposerRecord.SqlType(
+                        val("TYPE_NAME", rs, String.class),
+                        val("DATA_TYPE", rs, Integer.class),
+                        val("PRECISION", rs, Integer.class),
+                        val("LITERAL_PREFIX", rs, String.class),
+                        val("LITERAL_SUFFIX", rs, String.class),
+                        val("CREATE_PARAMS", rs, String.class),
+                        mapTypeNullable(val("NULLABLE", rs, Short.class)),
+                        val("CASE_SENSITIVE", rs, Boolean.class),
+                        mapTypeSearchable(val("SEARCHABLE", rs, Short.class)),
+                        val("UNSIGNED_ATTRIBUTE", rs, Boolean.class),
+                        val("FIXED_PREC_SCALE", rs, Boolean.class),
+                        val("AUTO_INCREMENT", rs, Boolean.class),
+                        val("LOCAL_TYPE_NAME", rs, String.class),
+                        val("MINIMUM_SCALE", rs, Short.class),
+                        val("MAXIMUM_SCALE", rs, Short.class),
+                        val("SQL_DATA_TYPE", rs, Integer.class),
+                        val("SQL_DATETIME_SUB", rs, Integer.class),
+                        val("NUM_PREC_RADIX", rs, Integer.class)
+                );
+                sqlTypes.add(sqlType);
+            }
+        }
+        return sqlTypes;
+    }
+
+    private ComposerRecord.TypeSearchable mapTypeSearchable(Short nullable) {
+        return Optional.ofNullable(nullable).map(s ->
+        {
+            switch (s) {
+                case 0 -> {
+                    return ComposerRecord.TypeSearchable.TYPE_PRED_NONE;
+                }
+                case 1 -> {
+                    return ComposerRecord.TypeSearchable.TYPE_PRED_CHAR;
+                }
+                case 2 -> {
+                    return ComposerRecord.TypeSearchable.TYPE_PRED_BASIC;
+                }
+                case 3 -> {
+                    return ComposerRecord.TypeSearchable.TYPE_SEARCHABLE;
+                }
+                default -> {
+                    return null;
+                }
+            }
+        }).orElse(null);
+    }
+
+    private ComposerRecord.TypeNullable mapTypeNullable(Short nullable) {
+        return Optional.ofNullable(nullable).map(s ->
+        {
+            switch (s) {
+                case 0 -> {
+                    return ComposerRecord.TypeNullable.TYPE_NULLABLE;
+                }
+                case 1 -> {
+                    return ComposerRecord.TypeNullable.TYPE_NO_NULLS;
+                }
+                default -> {
+                    return ComposerRecord.TypeNullable.TYPE_NULLABLE_UNKNOWN;
+                }
+            }
+        }).orElse(ComposerRecord.TypeNullable.TYPE_NULLABLE_UNKNOWN);
+    }
+
     private ComposerRecord.BooleanResponse map(String code) {
         return Optional.ofNullable(code).map(s ->
         {

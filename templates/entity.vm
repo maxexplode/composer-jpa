@@ -1,0 +1,23 @@
+package ${packageName}
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="${tableName}")
+public ${identifier} ${resourceName}
+{
+
+    #foreach( $field in $fields )
+    @Column(name="${field.getColumnName()}", nullable=${field.isNullable()} #if(${filed.getLength()} > 0), length=${field.getLength()}#else#end)
+    private ${field.getType()} ${field.getColumnName()};
+
+    #end
+    #foreach( $field in $fields )
+    public ${field.getType()} get${field.getColumnName()}() {
+        return this.${field.getColumnName()};
+    }
+    #end
+
+}

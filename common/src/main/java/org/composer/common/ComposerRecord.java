@@ -17,11 +17,39 @@ public class ComposerRecord {
 
     public enum ColumnNullable {NO_NULL, NULLABLE, UNKNOWN}
 
+    public enum TypeNullable {TYPE_NO_NULLS, TYPE_NULLABLE, TYPE_NULLABLE_UNKNOWN}
+
+    public enum TypeSearchable{TYPE_PRED_NONE, TYPE_PRED_CHAR, TYPE_PRED_BASIC,TYPE_SEARCHABLE }
+
     public enum BooleanResponse {YES, NO, NA}
 
     public enum UpdateDeleteRule {IMPORTED_NO_ACTION, IMPORTED_KEY_CASCADE, IMPORTED_KEY_SET_NULL, IMPORTED_KEY_SET_DEFAULT, IMPORTED_KEY_RESTRICT}
 
     public enum Deferrability {IMPORTED_KEY_INITIALLY_DEFERRED, IMPORTED_KEY_INITIALLY_IMMEDIATE, IMPORTED_KEY_NOT_DEFERRABLE}
+
+    public static record SqlType(
+            String typeName,
+            Integer dataType,
+            Integer precision,
+            String literalSuffix,
+            String literalPrefix,
+            String createParams,
+            TypeNullable nullable,
+            Boolean caseSensitive,
+            TypeSearchable searchable,
+            Boolean unsignedAttribute,
+            Boolean fixedPrecScale,
+            Boolean autoIncrement,
+            String localTypeName,
+            Short minimumScale,
+            Short maximumScale,
+            Integer sqlDataType,
+            Integer sqlDateTimeSub,
+            Integer numPrecRadix
+            ) {
+    }
+
+    ;
 
     public static record Scheme(String scheme, String catalog) {
 

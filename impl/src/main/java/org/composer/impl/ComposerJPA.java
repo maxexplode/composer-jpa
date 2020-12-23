@@ -5,6 +5,8 @@ import org.composer.api.ServiceRegistry;
 import org.composer.api.introspect.IntrospectPhase;
 import org.composer.common.ComposerRecord;
 import org.composer.common.IntrospectContext;
+import org.composer.common.ProjectConfig;
+import org.composer.impl.generator.Generator;
 
 import java.sql.*;
 
@@ -67,7 +69,20 @@ public class ComposerJPA {
                                 System.out.println("matched catalog : " + scheme.catalog());
                                 configuration.setCatalog(scheme.catalog());
                                 List<ComposerRecord.Table> tables = mapper.getTables(metaData, configuration);
-                                introspectTables(tables);
+                                List<ComposerRecord.SqlType> sqlTypes = mapper.getSqlTypes(metaData, configuration);
+                                IntrospectContext context = new IntrospectContext(tables, sqlTypes, ProjectConfig.builder()
+                                        .name("Composer Demo")
+                                        .packageName("org.composer.generate.demo")
+                                        .outPath("C:\\Projects\\composer-jpa\\gen")
+                                        .extension(".java")
+                                        .escapingDelimiters(new char[]{'_'})
+                                        .build());
+                                List<IntrospectPhase> service = ServiceRegistry.<IntrospectPhase>findService(ServiceRegistry.ServiceType.PHASER);
+                                service.forEach(introspectPhase -> {
+                                    introspectPhase.handle(context);
+                                });
+                                Generator generator = new Generator(context);
+                                generator.init();
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -78,13 +93,4 @@ public class ComposerJPA {
             e.printStackTrace();
         }
     }
-
-    private static void introspectTables(List<ComposerRecord.Table> tables) {
-        IntrospectContext context = new IntrospectContext(tables);
-        List<IntrospectPhase> service = ServiceRegistry.<IntrospectPhase>findService(ServiceRegistry.ServiceType.PHASER);
-        service.forEach(introspectPhase -> {
-            introspectPhase.handle(context);
-        });
-    }
-
 }

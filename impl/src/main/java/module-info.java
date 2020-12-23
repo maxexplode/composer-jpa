@@ -10,6 +10,7 @@ module impl {
     uses ConfigResolver;
     requires common;
     requires api;
+    requires org.apache.commons.text;
     requires config;
     requires java.sql;
     requires velocity.engine.core;
