@@ -2,13 +2,8 @@ package org.composer.config.resolver;
 
 
 import org.composer.api.Service;
-import org.composer.api.ServiceRegistry;
-import org.composer.config.ComposerConfig;
+import org.composer.common.ServiceType;
 import org.composer.config.Config;
-
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 public class ConfigResolver implements Service {
 
@@ -18,9 +13,9 @@ public class ConfigResolver implements Service {
     }
 
     @Override
-    public ServiceRegistry.ServiceType getType()
+    public ServiceType getType()
     {
-        return ServiceRegistry.ServiceType.CONFIG;
+        return ServiceType.CONFIG;
     }
 
     public Config resolveConfiguration() throws Exception {
