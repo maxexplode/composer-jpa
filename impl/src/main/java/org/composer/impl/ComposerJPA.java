@@ -80,8 +80,8 @@ public class ComposerJPA {
                                         .extension(".java")
                                         .escapingDelimiters(new char[]{'_'})
                                         .build());
-                                List<IntrospectPhase> service = ServiceRegistry.<IntrospectPhase>findService(ServiceType.PHASER);
-                                service.forEach(introspectPhase -> {
+                                ServiceWrapper<IntrospectPhase> service = ServiceRegistry.findService(ServiceType.PHASER);
+                                service.services().forEach(introspectPhase -> {
                                     introspectPhase.handle(context);
                                 });
                                 Generator generator = new Generator(context);

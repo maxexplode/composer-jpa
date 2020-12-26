@@ -5,6 +5,7 @@ import org.apache.velocity.VelocityContext;
 import org.composer.common.IntrospectContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.composer.common.model.ColumnDescriptor;
+import org.composer.config.ConfigUtil;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -25,7 +26,8 @@ public class Generator {
     }
 
     public void init() {
-        String props = "C:\\Projects\\composer-jpa\\configuration\\velocity.properties";
+
+        String props = ConfigUtil.velocityConfig();
 
         VelocityEngine velocityEngine = new VelocityEngine(props);
         velocityEngine.init();

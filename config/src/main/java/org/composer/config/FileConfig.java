@@ -1,5 +1,5 @@
 package org.composer.config;
 
-public class Config {
+public class FileConfig {
     public ComposerConfig composer;
 }

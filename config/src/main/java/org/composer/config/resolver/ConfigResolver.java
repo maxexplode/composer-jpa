@@ -3,13 +3,13 @@ package org.composer.config.resolver;
 
 import org.composer.api.Service;
 import org.composer.common.ServiceType;
-import org.composer.config.Config;
+import org.composer.config.FileConfig;
 
 public class ConfigResolver implements Service {
 
     @Override
-    public void service() throws Exception {
-        resolveConfiguration();
+    public Object service() throws Exception {
+        return resolveConfiguration();
     }
 
     @Override
@@ -18,7 +18,7 @@ public class ConfigResolver implements Service {
         return ServiceType.CONFIG;
     }
 
-    public Config resolveConfiguration() throws Exception {
+    public FileConfig resolveConfiguration() throws Exception {
         return null;
     }
 }

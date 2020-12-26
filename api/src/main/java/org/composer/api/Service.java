@@ -5,7 +5,7 @@ import org.composer.common.ServiceType;
 public interface Service {
     ServiceType getType();
 
-    default void service() throws Exception {
-
+    default Object service() throws Exception {
+        return null;
     }
 }
