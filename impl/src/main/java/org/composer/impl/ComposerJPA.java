@@ -1,15 +1,10 @@
 package org.composer.impl;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.core.Logger;
 import org.apache.logging.log4j.core.LoggerContext;
 import org.composer.api.Service;
 import org.composer.api.ServiceRegistry;
 import org.composer.api.introspect.IntrospectPhase;
-import org.composer.common.AppConstants;
-import org.composer.common.ComposerRecord;
-import org.composer.common.IntrospectContext;
-import org.composer.common.ProjectConfig;
+import org.composer.common.*;
 import org.composer.impl.generator.Generator;
 
 import java.sql.*;
@@ -85,7 +80,7 @@ public class ComposerJPA {
                                         .extension(".java")
                                         .escapingDelimiters(new char[]{'_'})
                                         .build());
-                                List<IntrospectPhase> service = ServiceRegistry.<IntrospectPhase>findService(ServiceRegistry.ServiceType.PHASER);
+                                List<IntrospectPhase> service = ServiceRegistry.<IntrospectPhase>findService(ServiceType.PHASER);
                                 service.forEach(introspectPhase -> {
                                     introspectPhase.handle(context);
                                 });

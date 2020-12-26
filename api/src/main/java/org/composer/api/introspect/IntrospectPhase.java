@@ -2,7 +2,7 @@ package org.composer.api.introspect;
 
 import org.composer.common.IntrospectContext;
 import org.composer.api.Service;
-import org.composer.api.ServiceRegistry;
+import org.composer.common.ServiceType;
 
 public class IntrospectPhase implements Service {
 
@@ -12,7 +12,7 @@ public class IntrospectPhase implements Service {
     }
 
     @Override
-    public ServiceRegistry.ServiceType getType() {
-        return ServiceRegistry.ServiceType.PHASER;
+    public ServiceType getType() {
+        return ServiceType.PHASER;
     }
 }

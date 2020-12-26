@@ -1,7 +1,9 @@
 package org.composer.api;
 
+import org.composer.common.ServiceType;
+
 public interface Service {
-    ServiceRegistry.ServiceType getType();
+    ServiceType getType();
 
     default void service() throws Exception {
 

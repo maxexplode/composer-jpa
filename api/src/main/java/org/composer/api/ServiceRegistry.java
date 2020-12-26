@@ -3,17 +3,13 @@ package org.composer.api;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.composer.common.ServiceType;
 
 import java.util.*;
 
 public class ServiceRegistry {
 
     static Logger logger = LogManager.getLogger("API");
-
-    public enum ServiceType {
-        PHASER,
-        CONFIG
-    }
 
     private static final Map<ServiceType, List<Service>> SERVICE_REGISTRY = new HashMap<>();
 
