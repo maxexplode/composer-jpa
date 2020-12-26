@@ -1,12 +1,9 @@
 package org.composer.config;
 
-import org.composer.common.stereotype.config.Config;
-import org.composer.common.stereotype.config.ConfigProperty;
+import lombok.Data;
 
-@Config(value = "template")
+@Data
 public class TemplateConfig {
-    @ConfigProperty("gen")
     private String generator;
-    @ConfigProperty("location")
     private String location;
 }

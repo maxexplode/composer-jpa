@@ -1,1 +1,0 @@
-package org.composer.common.stereotype;

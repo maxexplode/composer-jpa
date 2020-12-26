@@ -14,5 +14,7 @@ module impl {
     requires config;
     requires java.sql;
     requires velocity.engine.core;
+    requires org.apache.logging.log4j;
+    requires org.apache.logging.log4j.core;
     provides IntrospectPhase with InitializationPhase, IdentifierPhase;
 }

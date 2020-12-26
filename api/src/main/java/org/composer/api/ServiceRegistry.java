@@ -1,8 +1,15 @@
 package org.composer.api;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.*;
 
 public class ServiceRegistry {
+
+    static Logger logger = LogManager.getLogger("API");
+
     public enum ServiceType {
         PHASER,
         CONFIG
@@ -13,6 +20,11 @@ public class ServiceRegistry {
     public static <T extends Service> void registerService(ServiceType type, T service) {
         SERVICE_REGISTRY.computeIfAbsent(type, t -> new ArrayList<>());
         if (!SERVICE_REGISTRY.get(type).contains(service)) {
+            try {
+                service.service();
+            } catch (Exception e) {
+                logger.log( Level.ALL, "", e);
+            }
             SERVICE_REGISTRY.get(type).add(service);
         }
     }

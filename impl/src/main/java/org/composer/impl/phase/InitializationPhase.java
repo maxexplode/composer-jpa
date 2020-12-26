@@ -22,7 +22,7 @@ public class InitializationPhase extends IntrospectPhase {
         context.getTables().forEach(table ->
         {
             context.getDescriptorLocal().get().add(EntityDescriptor.builder()
-                    .entityName(CaseUtils.toCamelCase(table.name(), false, context.getConfig().getEscapingDelimiters()))
+                    .entityName(CaseUtils.toCamelCase(table.name(), true, context.getConfig().getEscapingDelimiters()))
                     .tableName(table.name())
                     .columns(table.columns().stream().map(column ->
                             ColumnDescriptor.builder()

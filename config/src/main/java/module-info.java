@@ -5,7 +5,11 @@ import org.composer.config.resolver.FileConfigResolver;
 module config {
     requires common;
     requires api;
+    requires lombok;
+    requires org.yaml.snakeyaml;
+    requires org.apache.logging.log4j;
     exports org.composer.config.resolver;
+    exports org.composer.config to org.yaml .snakeyaml;
     provides Service with ConfigResolver;
     provides ConfigResolver with FileConfigResolver;
 }

@@ -1,8 +1,12 @@
 package org.composer.impl;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.core.Logger;
+import org.apache.logging.log4j.core.LoggerContext;
 import org.composer.api.Service;
 import org.composer.api.ServiceRegistry;
 import org.composer.api.introspect.IntrospectPhase;
+import org.composer.common.AppConstants;
 import org.composer.common.ComposerRecord;
 import org.composer.common.IntrospectContext;
 import org.composer.common.ProjectConfig;
@@ -16,14 +20,18 @@ import java.util.function.Function;
 
 public class ComposerJPA {
 
-    public static Function<Class<? extends Service>, ServiceLoader> loaderDelegate = (a) ->
-            ServiceLoader.load(a.getClass());
+    public static Function<Class<? extends Service>, ServiceLoader> loaderDelegate = ServiceLoader::load;
 
     static {
+        System.setProperty(AppConstants.COMPOSER_HOME, "C:\\Projects\\composer-jpa\\");
         init();
     }
 
     static void init() {
+        //Log4j
+
+        LoggerContext context = LoggerContext.getContext(false);
+
         ServiceLoader<Service> services = ServiceLoader.load(Service.class);
         services.forEach(service -> {
             ServiceLoader<? extends Service> load = ServiceLoader.load(service.getClass());
