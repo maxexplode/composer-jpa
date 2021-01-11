@@ -2,8 +2,11 @@ package org.composer.impl.generator;
 
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
+import org.composer.api.ServiceRegistry;
 import org.composer.common.IntrospectContext;
 import org.apache.velocity.app.VelocityEngine;
+import org.composer.common.ServiceType;
+import org.composer.common.ServiceWrapper;
 import org.composer.common.model.ColumnDescriptor;
 import org.composer.config.ConfigUtil;
 
@@ -26,6 +29,8 @@ public class Generator {
     }
 
     public void init() {
+
+        ServiceWrapper<Object> service = ServiceRegistry.findService(ServiceType.CONFIG);
 
         String props = ConfigUtil.velocityConfig();
 

@@ -25,7 +25,7 @@ public class ServiceRegistry {
                     SERVICE_OBJECTS.get(type).put(object.getClass(), object);
                 }
             } catch (Exception e) {
-                logger.log(Level.ALL, "", e);
+                logger.log(Level.ALL, "Error occurred when service", e);
             }
             SERVICE_REGISTRY.get(type).add(service);
         }
